@@ -10,7 +10,7 @@ menu:
     title: "语法参考"
 ---
 
-本文档是一份您可以在Yarn文件中编写的各种语法的快速参考指南。其并非意在成为一个教程，如需教程，请查阅[此处]({{< ref "tutorial.zh.md" >}})！如果您想知道如何构造Yarn代码行才能正常工作，那么本文档将是一个有用的参考。
+本文档是一份您可以在Yarn文件中编写的各种语法的快速参考指南。其并非意在成为一个教程，如需教程，请查阅[此处]({{<ref "tutorial.zh.md">}})！如果您想知道如何构造Yarn代码行才能正常工作，那么本文档将是一个有用的参考。
 
 ## 基础用法
 
@@ -37,8 +37,6 @@ Yarn文件以节点（nodes）作为分割。每个节点的组成包含多种�
 
 如果您使用了可视化编辑器，这些节点组成了您在画布上看到的区块。
 
-If you are using a visual editor, these nodes make up the little boxes you see on the canvas.
-
 ## 标头（header）
 
 标头包含了节点的元数据（metadata），并且可以根据需要包含任意数量的节点元数据。
@@ -57,8 +55,6 @@ If you are using a visual editor, these nodes make up the little boxes you see o
 
 `title`标头定义了节点的名字。所有节点必须存在一个`title`。
 
-The `title` header defines the name of the node. All nodes must have a `title`.
-
 此标头看起来将会像是`title:nodename`形式。节点的名字（在这个示例中，节点的名字是`nodename`）在整个项目中必须唯一，并且可以是大小写字母和数字的任意组合。节点标题不能有空格。
 
 这个值是区分大小写的，所以`nodename`与`nodeName`是不同的。
@@ -73,7 +69,7 @@ The `title` header defines the name of the node. All nodes must have a `title`.
 
 正文是节点中`---`和`===`之间的部分，您将会在这个地方花费大量的时间，同时也是所有对话进行的地方。
 
-## 对话（Dialogue）
+## 对话（dialogue）
 
 通常情况下您的Yarn文件的主要内容都是对话——游戏中您的角色所说的台词。
 对话的每一行都将被Yarn Spinner视为新的对话声明。
@@ -97,7 +93,7 @@ The `title` header defines the name of the node. All nodes must have a `title`.
 
 如果您不编写角色名称，那么您的游戏将需要其他方法来确定哪一行对应哪个角色，选择哪种形式将由您自己决定。
 
-### 内联表达式（Inline Expressions）
+### 内联表达式（inline expressions）
 
 对话行中支持嵌入[表达式](#expression)。这些表达式将会在对话运行到此处时展开。在`{`和`}`之内的任何表达式都会被解析并与其他文本一同按序渲染
 
@@ -117,23 +113,23 @@ The `title` header defines the name of the node. All nodes must have a `title`.
 内联表达式可以同[format functions](#format-functions)一同使用，尤其是当您需要对您的文本进行[本地化]({{<ref "localisation.zh.md#localising-inline-expressions">}})的时候。
 {{</note>}}
 
-## Options
+## 选项（options）
 
-Options are how you can move between different nodes.
+选项允许您在不同节点之间移动。
 
 ```yarn
-[[Text to show to the user|NodeName]]
+[[展示给用户的文本|节点名字]]
 ```
 
-Options are broken up into two parts seperated by a vertical bar symbol (`|`).
-The first part is any text that is to be shown to the user, and the second part after the bar is the name of the node.
-The node name must be the name of another node somewhere else in your Yarn files, or else the program will not work.
-After the player selects an option the node linked, in this case `NodeName`, will be loaded and the story will continue from there.
+选项分为两部分，用竖线符号（`|`）分隔。
+第一部分是要显示给用户的任何文本，在竖线后面的第二部分是节点的名称。
+节点名称必须是Yarn文件中其他位置的另一个节点的名称，否则程序将无法运行。
+在玩家选择一个选项后，将加载链接的节点（在本例中为`节点名字`），并且故事将从此处继续。
 
-Inline expressions can be used in options.
+内联表达式可以在选项中使用。
 
 {{<note>}}
-Learn more about options in {{< xref "/docs/writing/controlling" "options" >}}.
+在{{< xref "/docs/writing/controlling.zh" "options" >}}中进一步了解选项。
 {{</note>}}
 
 
