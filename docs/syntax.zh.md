@@ -134,39 +134,39 @@ Yarn文件以节点（nodes）作为分割。每个节点的组成包含多种�
 
 
 
-## Jumps
+## 跳转（jumps）
 
-A jump tells Yarn Spinner to start running a different node. They're not shown to the player.
+跳转告诉Yarn Spinner开始运行某个其他节点。它们不会显示给玩家。
 
 ```yarn
-[[NodeName]]
+[[节点名字]]
 ```
 
-When Yarn Spinner encounters this line, it will immediately start running the contents of the `NodeName` node.
+当Yarn Spinner遇到这一行时，它将立即开始运行`节点名字`节点的内容。
 
 {{<note>}}
-Learn more about jumps in {{< xref "/docs/writing/controlling" "jumps">}}.
+在{{< xref "/docs/writing/controlling" "jumps">}}中进一步了解跳转。
 {{</note>}}
 
 
 
-## Shortcut Options
+## 快捷选项（shortcut options）
 
-Shortcut options let you create simple branching dialogue without needing to create new nodes.
-Each shortcut starts with the `->` arrow and then the line of text that should be presented to the player.
+快捷选项使您可以无需创建新节点来创建简单的分支对话框。
+每个快捷选项均以`->`箭头开头，然后是应显示给玩家的一行文本。
 
 ```yarn
-Where should we go next?
--> North
--> South
--> East
--> West
+我们接下来应该去哪？
+-> 北
+-> 南
+-> 东
+-> 西
 ```
 
-This would show the line `Where should we go next?` and then the options of `North`, `South`, `East`, `West`.
+这将显示`我们接下来应该去哪？`行，然后显示`北`，`南`，`东`，`西`的选项。
 
 {{<note>}}
-Learn more about shortcut options in {{< xref "/docs/writing/controlling" "shortcut-options" >}}.
+在{{< xref "/docs/writing/controlling" "shortcut-options" >}}中进一步了解快捷选项。
 {{</note>}}
 
 
