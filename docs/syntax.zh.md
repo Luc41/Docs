@@ -252,41 +252,57 @@ Yarn文件以节点（nodes）作为分割。每个节点的组成包含多种�
 变量可以通过使用关键字`true`、`TRUE`和`false`、`FALSE`来赋值为真或假。
 关键字首字母大小写敏感，因此`<<set $var to true>>`是合法的，`<<set $var to True>>`不合法。
 
-## 条件
+## 条件语句
+
+条件语句基于逻辑语句来创建不同的对话和事件分支。
+所有条件语句拥有相同的基本结构，一个`if`语句，后接零个或以上的`elseif`语句，继续后接零个或一个`else`语句，最终结束于`endif`。
 
 Conditionals are how you can create different branching dialogue and events based on logical statements.
 All conditionals take the same basic structure, an `if` statement, then zero or more `elseif` statements, then zero or one `else` statements, and finally the `endif`.
 
+Yarn Spinner将一直处理条件直到满足条件的部分为止，然后运行并显示该条件的语句。
+
 Yarn Spinner will work its way down the conditional until it meets a piece of it it can run and presents the statements for that piece.
 ```yarn
 <<if $money > 1>>
-	I would like a horse please.
+	我想买一匹马。
 	<<set $money to $money - 2>>
 	<<set $hasHorse to true>>
 <<elseif $money eq 1 >>
-	Just a drink thanks.
+	只要一杯，谢谢。 
 	<<set $money to $money - 1>>
 <<else>>
-	Drat, I can't afford anything.
+	该死，我什么也买不起。
 <<endif>>
 ```
 
+以上为例，如果`$money`正好为`1`则显示`只要一杯，谢谢。 `行，但如果`money`为`5`则显示`我想买一匹马。`行。
+
 Take the above example, if `$money` happens to be `1` then the line `Just a drink thanks.` will be shown, but if `$money` was `5` then the line `I would like a horse please.` would be shown.
+
+条件语句缩进if内的行可能更容易理解，但这不是必需的。
 
 It can be more readable to indent lines inside the `if`, but it's not required.
 
 
 {{<note>}}
-Learn more about conditionals in {{< xref "/docs/writing/controlling" >}}.
+在{{< xref "/docs/writing/controlling" >}}中进一步了解条件语句。
 {{</note>}}
 
-### `if`, `elseif`, `else` and `endif` 
+### `if`, `elseif`, `else` 和 `endif` 
+
+`if`语句会创建一个条件语句，其起始于`<<`关键字，后接`if`关键字和控制`if`语句的表达式，最终终止于关键字`>>`。
 
 The `if` statement opens a conditional and is comprised of the `<<` command opening keyword followed immediately by the `if` keyword, then an expression that controls the `if` and finally the command close keyword `>>`.
+
+如果表达式为真，则显示在`if`与条件语句下一部分之间的任何行，对于`elseif`、`else`或`endif`同理。
 
 Any lines that go between the `if` and the next part of the conditional, so either an `elseif`, an `else`, or an `endif`, is shown if the expression is ultimately true.
 
 #### `elseif`
+
+`elseif`语句是条件语句的可选部分，其作用与`if`相似，但是使用`elseif`关键字。
+每个`elseif`结构与`if`结构相同，并且您可以根据需要添加包括零个的任意数量的`elseif`。
 
 An `elseif` is an optional part of the conditional and works similar to the `if` but instead uses the `elseif` keyword.
 Each `elseif` is identical to its `if` counterpart in structure and you can have as many `elseif`'s as you want, including none.
@@ -297,6 +313,9 @@ Each `elseif` is identical to its `if` counterpart in structure and you can have
 
 #### `else`
 
+`else`语句是条件语句的回调并且它仅在`if`和所有的`elseif`均判断为假时运行。
+`else`语句是非必须的。
+
 The `else` is the fallback of the conditional and is run only if the `if` and all its `elseif`'s evaluate to false.
 It is optional.
 
@@ -306,15 +325,25 @@ It is optional.
 
 #### `endif`
 
+`<<endif>>`语句是必需的，它将结束一个条件语句。
+需要该语句是因为Yarn Spinner需要知道条件何时结束。
+
 The `<<endif>>` finishes the conditional statement and is required.
 It is needed so Yarn Spinner knows when the conditional has concluded.
 
 
-### Expression
+### 表达式
+
+表达式是一种数学或逻辑运算操作，运行和读起来就像数学式一样。
+为了使表达式可以在条件语句中使用，它最终需要判断为真或假。
+如果表达式的结果为真，则它将成为要运行的条件语句的一部分。
 
 An expression is a mathematical or logical operation and work and looks like a line of maths.
 For the expression to be useful in the conditional it needs to eventually evaluate to true or false.
 If the expression results in true it will be the part of the conditional that gets run.
+
+所有表达式都遵循相同的模式，子表达式、运算符，然后是另一个子表达式。 
+如果有需要的话，子表达式可以进一步分解为其他表达式。
 
 All expressions follow the same pattern of a subexpression followed by an operator and then another subexpression.
 The subexpressions can further broken up into other expression if needed:
@@ -323,65 +352,82 @@ The subexpressions can further broken up into other expression if needed:
 <<if ($counter + 1) >= ($max - 2)>>
 ```
 
-#### Logical operators
+#### 逻辑运算符
+
+Yarn Spinner支持一下逻辑运算符并且大多数都有不止一种写法：
 
 Yarn Spinner supports the following logical operators and most have multiple ways being written:
 
-- Equality: `eq` or `is` or `==`
-- Inequality: `neq` or `!`
-- Greater than: `gt` or `>`
-- Less than: `lt` or `<`
-- Less than or equal to: `lte` or `<=`
-- Greater than or equal to: `gte` or `>=`
-- Boolean OR: `or` or `||`
-- Boolean XOR: `xor` or `^`
-- Boolean Negation: `!`
-- Boolean AND: `and` or `&&`
+- 相等: `eq` 或 `is` 或 `==`
+- 不相等: `neq` 或 `!`
+- 大于: `gt` 或 `>`
+- 小于: `lt` 或 `<`
+- 小于等于: `lte` 或 `<=`
+- 大于等于: `gte` 或 `>=`
+- 布尔或: `or` 或 `||`
+- 布尔异或: `xor` 或 `^`
+- 布尔非: `!`
+- 布尔与: `and` 或 `&&`
 
-#### Maths operators
+#### 数学运算符
 
-- Addition: `+`
-- Subtraction: `-`
-- Multiplication: `*`
-- Division: `/`
-- Truncating Remainder Division: `%`
-- Brackets: `(` to open the brackets and `)` to close them.
+- 相加: `+`
+- 相减: `-`
+- 相乘: `*`
+- 相除: `/`
+- 相除取余: `%`
+- 括号: 使用`(` 开始括号，`)`闭合括号
 
-#### Order of operations
+#### 操作符优先级
+
+Yarn Spinner遵循一个相当标准的操作符优先级顺序，当操作符具有同等优先级时，会从左到右依次执行。
+操作符优先级如下：
 
 Yarn Spinner follows a fairly standard order of operations, and falling back to using left to right when operators are of equivalent priority.
 The order of operations is as follows:
 
-1. Brackets
-2. Boolean Negation
-3. Multiplication, Division, and Truncating Remainder Division
-4. Addition, Subtraction
-5. Less than or equals, Greater than or equals, Less than, Greater than
-6. Equality, Inequality
-7. Boolean AND, Boolean OR, Boolean XOR
+1. 括号
+2. 布尔非
+3. 相乘, 相除, 和相除取余
+4. 相加, 相减
+5. 小于等于, 大于等于, 小于, 大于
+6. 相等, 不相等
+7. 布尔与, 布尔或, 布尔异或
 
-## Commands
+## 命令
+
+命令是Yarn Spinner向游戏传达已发生的需要处理的事件的一种方式。
+这些语句通常用于触发成就并将角色和相机移动到需要的地方。 
 
 Commands are a way of Yarn Spinner communicating back to the game that events have happened that need to be handled.
 These are often used to trigger achievements and to move characters and cameras around to where they need to be.
+
+命令语句起始于命令起始符号`<<`，后接任何您想要传递到游戏的信息，最终结束于命令终止符号`>>`。
+举个例子：
 
 Commands start by having the command opening symbol `<<` then any text you want sent over to the game, and finish with the command close symbol `>>`.
 As an example:
 
 ```yarn
-<<move camera left>>
-<<unlockAchievement beganAdventure>>
+<<移动 相机 左>>
+<<解锁成就 开始冒险>>
 ```
+
+命令本身不做任何事情，您需要自行处理这些信息。
 
 Commands by themselves do nothing, you need to handle these messages yourself.
 
 Inline expressions can be used in options.
 
 {{<note>}}
-To learn more about how to define your own commands for your game, see {{<xref "/docs/unity/working-with-commands.md">}}.
+在 {{<xref "/docs/unity/working-with-commands.md">}}中进一步了解如何为您的游戏自定义命令。
 {{</note>}}
 
-## Localisation Tags
+## 本地化标签
+
+本地化标签是一种为本地化系统标记对话行的语句。
+如果您没有对您的游戏进行本地化则您不要该标签，也不会遇到它。
+每个标签起始于一个`#`符号紧接一个`line`关键字和一个自动生成的值。
 
 Localisation tags are a way of marking lines of dialogue to the localisation system.
 If you aren't localising your game you don't need them and will not encounter them.
@@ -391,33 +437,48 @@ Each tag starts with a `#` symbol and then have a `line` keyword and an autogene
 #line:a8e70c
 ```
 
+标签总是位于一行的末尾并且永远不应被手动编辑或创建。
+您将会在对话行，快捷选项和选项的末尾找到本地化标签。
+
 The tags always go on the end of the line and should never be edited or created manually.
 You will find localisation tags at the end of dialogue lines, shortcuts, and options.
 
 ```yarn
-Player: Hey. #line:a8e70c
-Sally: Oh! Hi. #line:2dc39b
+玩家: 你好。 #line:a8e70c
+萨丽: 噢! 你好。 #line:2dc39b
 
-[[See you later.|Sally.Exit]] #line:0facf7
+[[回头见。|萨丽.退出]] #line:0facf7
 ```
 
-## Format functions
+## 格式化函数（format functions）
+
+格式化函数允许您根据某个值选择内容。格式化函数在根据变量的值使句子在语法上正确是有用的。 
 
 Format functions allow you to select content based on a value. Format functions are useful for adapting a line to be grammatically valid based on the value of a variable. 
 
+举个例子，如果您想编写句子"I have 1 apple"，单词"apple"在英语中需要根据您所拥有的数量来改变（1 apple or 2 apples），使用格式化函数可以让您根据需要切换这个单词。
+
 For example, if you want to say the sentence "I have 1 apple", the word "apple" in English needs to change depending on whether you have 1 apple or 2 apples. Format functions allow you to switch the word out.
 
+格式化函数在[本地化]({{<ref "localisation.md">}})中是十分有用的，因为它在您使用的每个字符表中都可能不同。
+
 Format functions are extremely useful for [localisation]({{<ref "localisation.md">}}), because they can be different in each of the string tables that you're working with.
+
+格式化函数起始和终止于`[`和`]`。在这些大括号内，您可以指定要使用的特定格式功能，然后指定要使用的类别和替换项的列表。 
 
 Format functions start and end with `[` and `]`. Inside these braces, you specify which specific format function you want to use, and then a list of categories and replacements to use.
 
 {{<note>}}
-The format function syntax is based on similar implementations in [Unreal](https://docs.unrealengine.com/en-US/Gameplay/Localization/Formatting/#argumentmodifiers), [Unity](https://docs.unity3d.com/Packages/com.unity.localization@0.2/manual/index.html#plural-support), and Unicode's [MessageFormat](https://messageformat.github.io/messageformat/).
+格式化函数语法基于[Unreal](https://docs.unrealengine.com/en-US/Gameplay/Localization/Formatting/#argumentmodifiers), [Unity](https://docs.unity3d.com/Packages/com.unity.localization@0.2/manual/index.html#plural-support), 和Unicode的[MessageFormat](https://messageformat.github.io/messageformat/)中的类似实现。
 {{</note>}}
+
+一共有三种可用的格式化函数：`select`，`plural`和`ordinal`。
 
 There are three format functions available: `select`, `plural` and `ordinal`.
 
 ### `select`
+
+格式化函数`select`允许您使用变量的值在一组固定的选项之间进行选择。
 
 The `select` format function allows you to use a variable's value to select between a fixed set of options.   
 
@@ -425,10 +486,12 @@ The `select` format function allows you to use a variable's value to select betw
 [select {$value} option1="replacement1" option2="replacement2"]
 ```
 
+基于您提供的变量的值，将选择相应的替换项。在上面的示例中，如果`$value`的值为`option1`，则插入文本`"replacement1"`；如果`$value`的值为`option2`，则插入文本`"replacement2"`。替换项的数量没有限制。如果`$value`的值不为任何一个，则插入一个错误值。
+
 Based on the value of the variable you provide, different replacement will be selected. In the above example, if the value of `$value` is `"option1"`, then the text `"replacement1"` will be inserted; if `$value` is `"option2"`, then `"replacement2"` will be inserted. There's no limit on the number of options. If `$value` is neither, an error value will be inserted.
 
 {{<note>}}
-The `select` format function does not look for specific values; rather, it's a generic text replacement tool.
+格式化函数`select`不查找特定值；而是一个通用的文本替换工具。
 {{</note>}}
 
 This is most useful for when you want to use different pronouns based on a variable storing the gender of a character. 
