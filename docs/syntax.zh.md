@@ -171,89 +171,88 @@ Yarn文件以节点（nodes）作为分割。每个节点的组成包含多种�
 
 
 
-### Shortcut scope
+### 快捷范围（shortcut scope）
 
-Shortcuts allow you add additional statements below the shortcut to run additional lines, and in many cases is used for setting or updating variables.
-The new statements have to go below the shortcut option they are a part of and need to be indented relative to the shortcut.
-
-```yarn
--> North
-    It is cold to the north.
--> South
-    You've heard that the weather to the south is sunny.
--> East
-    You're not sure if the rumours of bandits to the east are true.
--> West
-
-You continue your journey.
-```
-
-Different lines will be shown to the player depending on what options they select:
-
-* In the above example if the player selected the `North` option the dialogue line `It is cold to the north` would be shown after and then `You continue your journey`. 
-* If they select `South` or `East`, they'll see different lines before `You continue your journey`
-* If they select `West`, they'll only see `You continue your journey`.
-
-The indentation must be kept consistent, or else Yarn Spinner won't be able to work out your intent.
-
-### Shortcut conditionals
-
-Shortcuts can also be limited to only be presented if needed.
-You do this by adding an `if` statement to the end of the shortcut.
+快捷选项允许您在其选项下方添加其他语句以运行其他行，并且在许多情况下，这些语句用于设置或更新变量。
+新语句必须位于快捷选项的下方，它们是快捷选项的一部分，并且需要相对于该快捷选项缩进。
 
 ```yarn
--> Locked Trapdoor <<if $hasKey is true>>
--> North
--> South
--> East
--> West
+-> 北
+    北方很冷。
+-> 南
+    您已经听说南方的天气晴朗。
+-> 东
+    您不确定东方强盗的传言是否属实。
+-> 西
+
+你继续你的旅程。
 ```
 
-In the above example the shortcut `Locked Trapdoor` will only appear as an option your players can pick if the variable `$hasKey` is `true`.
-If `$hasKey` is `false` only the four directions will appear.
+根据玩家选择的选项将会显示不同的行：
 
-## Variables
+* 在上面的示例中，如果玩家选择`北`选项，对话行`北方很冷`将会再接下来显示，紧接着是`你继续你的旅程`。
+* 如果选择`南`或`东`，玩家将会在`你继续你的旅程`之前看到不同的内容。
+* 如果选择`西`,玩家将仅能看到`你继续你的旅程`。
 
-You can store information inside variables.
+缩进必须保持一致，否则Yarn Spinner将无法解析您的意图。
 
-Variable names are any combination of letters and numbers preceded by the `$` symbol.
-Variable names are case sensitive, so `$varName` and `$varname` are two different variables as far as Yarn Spinner is concerned.
+### 快捷条件（shortcut conditionals）
 
-Variables are global in scope, so they exist across all nodes across all files.
-This means you can declare a variable in one file and then later use that variable in another file.
+快捷选项也可以限制为仅在需要时显示。
+您可以通过在快捷选项的末尾添加`if`语句来完成此操作。
 
-### Values
+```yarn
+-> 上锁的活板门 <<if $hasKey is true>>
+-> 北
+-> 南
+-> 东
+-> 西
+```
+在上面的示例中选项`上锁的活板门`只有在变量`$hasKey`是`true`的情况下才会显示为一个选项并被玩家选择。
+如果`$hasKey`为`false`则只有四个方向出现。
 
-Variables can hold numbers, text, `true` and `false`, or `null`.
+## 变量
 
-#### Setting values
+您可以在变量中存储信息。
 
-You can set and update values inside of variables using the `set` operation:
+变量名是字母和数字的任意组合，以`$`符号开始。
+变量名对大小写敏感，因此就Yarn Spinner而言，`$varName`和`$varname`是两个不同的变量。
+
+变量的作用域是全局的，因此他们存在于所有文件的所有节点中。
+这意味着你可以在一个文件中声明一个变量，然后另一个文件中使用该变量。
+
+### 值
+
+变量可以包含数字，文本，`true`和`false`或`null`。
+
+#### 赋值
+
+您可以使用`set`操作对变量来设置和更新变量内部的值：
 
 ```yarn
 <<set $var to 1>>
 ```
 
-The `set` operation takes the form of the command opening symbol `<<`, followed immediately by the `set` keyword, then the variable, `$var` in our case, then the `to` keyword, and finally the value you want.
+`set`操作的命令的格式为起始符号`<<`，后紧接关键字`set`，之后是变量，在本例中是`$var`，接着是关键字`to`，最终是您期望的值。
 
-You can also use the `=` in place of the `to` keyword if you wish.
+如果愿意，也可以使用`=`来替换关键字`to`。
 
-#### Numbers
+#### 数值
 
-Numbers are always decimals (technically, floating point) regardless of what values you give them.
-This means if you give a variable the value of `1` when you get it back out from Yarn Spinner it will be `1.0`.
+数值不论赋予什么值，其总是带有小数点的（技术上称为浮点数）。
+这意味着如果您对一个变量赋值`1`,当您从Yarn Spinner中返回它时将会是`1.0`。
 
-#### Text
+#### 文本
 
-Text inside variables can be anything you want but must be contained with quotation marks.
-This means that while `<<set $var to "hello">>` is valid, `<<set $var to hello>>` is not.
+变量内的文本可以是任何您想要的内容，但必须包含引号。 
+这意味着`<<set $var to "hello">>`是有效的，`<<set $var to hello>>`不是。
 
-#### `True` and `False`
+#### `真` 和 `假`
 
-Variables can be set to be true or false using the keywords `true` or `TRUE`, and `false` and `FALSE`.
-These are case sensitive, so `<<set $var to true>>` will work, but `<<set $var to True>>` will not.
+变量可以通过使用关键字`true`、`TRUE`和`false`、`FALSE`来赋值为真或假。
+关键字首字母大小写敏感，因此`<<set $var to true>>`是合法的，`<<set $var to True>>`不合法。
 
-## Conditionals
+## 条件
 
 Conditionals are how you can create different branching dialogue and events based on logical statements.
 All conditionals take the same basic structure, an `if` statement, then zero or more `elseif` statements, then zero or one `else` statements, and finally the `endif`.
