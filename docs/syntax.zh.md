@@ -257,12 +257,8 @@ Yarn文件以节点（nodes）作为分割。每个节点的组成包含多种�
 条件语句基于逻辑语句来创建不同的对话和事件分支。
 所有条件语句拥有相同的基本结构，一个`if`语句，后接零个或以上的`elseif`语句，继续后接零个或一个`else`语句，最终结束于`endif`。
 
-Conditionals are how you can create different branching dialogue and events based on logical statements.
-All conditionals take the same basic structure, an `if` statement, then zero or more `elseif` statements, then zero or one `else` statements, and finally the `endif`.
-
 Yarn Spinner将一直处理条件直到满足条件的部分为止，然后运行并显示该条件的语句。
 
-Yarn Spinner will work its way down the conditional until it meets a piece of it it can run and presents the statements for that piece.
 ```yarn
 <<if $money > 1>>
 	我想买一匹马。
@@ -278,12 +274,7 @@ Yarn Spinner will work its way down the conditional until it meets a piece of it
 
 以上为例，如果`$money`正好为`1`则显示`只要一杯，谢谢。 `行，但如果`money`为`5`则显示`我想买一匹马。`行。
 
-Take the above example, if `$money` happens to be `1` then the line `Just a drink thanks.` will be shown, but if `$money` was `5` then the line `I would like a horse please.` would be shown.
-
 条件语句缩进if内的行可能更容易理解，但这不是必需的。
-
-It can be more readable to indent lines inside the `if`, but it's not required.
-
 
 {{<note>}}
 在{{< xref "/docs/writing/controlling" >}}中进一步了解条件语句。
@@ -293,19 +284,12 @@ It can be more readable to indent lines inside the `if`, but it's not required.
 
 `if`语句会创建一个条件语句，其起始于`<<`关键字，后接`if`关键字和控制`if`语句的表达式，最终终止于关键字`>>`。
 
-The `if` statement opens a conditional and is comprised of the `<<` command opening keyword followed immediately by the `if` keyword, then an expression that controls the `if` and finally the command close keyword `>>`.
-
 如果表达式为真，则显示在`if`与条件语句下一部分之间的任何行，对于`elseif`、`else`或`endif`同理。
-
-Any lines that go between the `if` and the next part of the conditional, so either an `elseif`, an `else`, or an `endif`, is shown if the expression is ultimately true.
 
 #### `elseif`
 
 `elseif`语句是条件语句的可选部分，其作用与`if`相似，但是使用`elseif`关键字。
 每个`elseif`结构与`if`结构相同，并且您可以根据需要添加包括零个的任意数量的`elseif`。
-
-An `elseif` is an optional part of the conditional and works similar to the `if` but instead uses the `elseif` keyword.
-Each `elseif` is identical to its `if` counterpart in structure and you can have as many `elseif`'s as you want, including none.
 
 ```yarn
 <<elseif $money eq 1>>
@@ -316,9 +300,6 @@ Each `elseif` is identical to its `if` counterpart in structure and you can have
 `else`语句是条件语句的回调并且它仅在`if`和所有的`elseif`均判断为假时运行。
 `else`语句是非必须的。
 
-The `else` is the fallback of the conditional and is run only if the `if` and all its `elseif`'s evaluate to false.
-It is optional.
-
 ```yarn
 <<else>>
 ```
@@ -328,25 +309,14 @@ It is optional.
 `<<endif>>`语句是必需的，它将结束一个条件语句。
 需要该语句是因为Yarn Spinner需要知道条件何时结束。
 
-The `<<endif>>` finishes the conditional statement and is required.
-It is needed so Yarn Spinner knows when the conditional has concluded.
-
-
 ### 表达式
 
 表达式是一种数学或逻辑运算操作，运行和读起来就像数学式一样。
 为了使表达式可以在条件语句中使用，它最终需要判断为真或假。
 如果表达式的结果为真，则它将成为要运行的条件语句的一部分。
 
-An expression is a mathematical or logical operation and work and looks like a line of maths.
-For the expression to be useful in the conditional it needs to eventually evaluate to true or false.
-If the expression results in true it will be the part of the conditional that gets run.
-
 所有表达式都遵循相同的模式，子表达式、运算符，然后是另一个子表达式。 
 如果有需要的话，子表达式可以进一步分解为其他表达式。
-
-All expressions follow the same pattern of a subexpression followed by an operator and then another subexpression.
-The subexpressions can further broken up into other expression if needed:
 
 ```yarn
 <<if ($counter + 1) >= ($max - 2)>>
@@ -355,8 +325,6 @@ The subexpressions can further broken up into other expression if needed:
 #### 逻辑运算符
 
 Yarn Spinner支持一下逻辑运算符并且大多数都有不止一种写法：
-
-Yarn Spinner supports the following logical operators and most have multiple ways being written:
 
 - 相等: `eq` 或 `is` 或 `==`
 - 不相等: `neq` 或 `!`
@@ -383,9 +351,6 @@ Yarn Spinner supports the following logical operators and most have multiple way
 Yarn Spinner遵循一个相当标准的操作符优先级顺序，当操作符具有同等优先级时，会从左到右依次执行。
 操作符优先级如下：
 
-Yarn Spinner follows a fairly standard order of operations, and falling back to using left to right when operators are of equivalent priority.
-The order of operations is as follows:
-
 1. 括号
 2. 布尔非
 3. 相乘, 相除, 和相除取余
@@ -397,16 +362,10 @@ The order of operations is as follows:
 ## 命令
 
 命令是Yarn Spinner向游戏传达已发生的需要处理的事件的一种方式。
-这些语句通常用于触发成就并将角色和相机移动到需要的地方。 
-
-Commands are a way of Yarn Spinner communicating back to the game that events have happened that need to be handled.
-These are often used to trigger achievements and to move characters and cameras around to where they need to be.
+这些语句通常用于触发成就并将角色和相机移动到需要的地方。
 
 命令语句起始于命令起始符号`<<`，后接任何您想要传递到游戏的信息，最终结束于命令终止符号`>>`。
 举个例子：
-
-Commands start by having the command opening symbol `<<` then any text you want sent over to the game, and finish with the command close symbol `>>`.
-As an example:
 
 ```yarn
 <<移动 相机 左>>
@@ -414,10 +373,6 @@ As an example:
 ```
 
 命令本身不做任何事情，您需要自行处理这些信息。
-
-Commands by themselves do nothing, you need to handle these messages yourself.
-
-Inline expressions can be used in options.
 
 {{<note>}}
 在 {{<xref "/docs/unity/working-with-commands.md">}}中进一步了解如何为您的游戏自定义命令。
@@ -429,19 +384,12 @@ Inline expressions can be used in options.
 如果您没有对您的游戏进行本地化则您不要该标签，也不会遇到它。
 每个标签起始于一个`#`符号紧接一个`line`关键字和一个自动生成的值。
 
-Localisation tags are a way of marking lines of dialogue to the localisation system.
-If you aren't localising your game you don't need them and will not encounter them.
-Each tag starts with a `#` symbol and then have a `line` keyword and an autogenerated value.
-
 ```yarn
 #line:a8e70c
 ```
 
 标签总是位于一行的末尾并且永远不应被手动编辑或创建。
 您将会在对话行，快捷选项和选项的末尾找到本地化标签。
-
-The tags always go on the end of the line and should never be edited or created manually.
-You will find localisation tags at the end of dialogue lines, shortcuts, and options.
 
 ```yarn
 玩家: 你好。 #line:a8e70c
@@ -452,21 +400,13 @@ You will find localisation tags at the end of dialogue lines, shortcuts, and opt
 
 ## 格式化函数（format functions）
 
-格式化函数允许您根据某个值选择内容。格式化函数在根据变量的值使句子在语法上正确是有用的。 
-
-Format functions allow you to select content based on a value. Format functions are useful for adapting a line to be grammatically valid based on the value of a variable. 
+格式化函数允许您根据某个值选择内容。格式化函数在根据变量的值使句子在语法上正确是有用的。
 
 举个例子，如果您想编写句子"I have 1 apple"，单词"apple"在英语中需要根据您所拥有的数量来改变（1 apple or 2 apples），使用格式化函数可以让您根据需要切换这个单词。
 
-For example, if you want to say the sentence "I have 1 apple", the word "apple" in English needs to change depending on whether you have 1 apple or 2 apples. Format functions allow you to switch the word out.
-
 格式化函数在[本地化]({{<ref "localisation.md">}})中是十分有用的，因为它在您使用的每个字符表中都可能不同。
 
-Format functions are extremely useful for [localisation]({{<ref "localisation.md">}}), because they can be different in each of the string tables that you're working with.
-
-格式化函数起始和终止于`[`和`]`。在这些大括号内，您可以指定要使用的特定格式功能，然后指定要使用的类别和替换项的列表。 
-
-Format functions start and end with `[` and `]`. Inside these braces, you specify which specific format function you want to use, and then a list of categories and replacements to use.
+格式化函数起始和终止于`[`和`]`。在这些大括号内，您可以指定要使用的特定格式功能，然后指定要使用的类别和替换项的列表。
 
 {{<note>}}
 格式化函数语法基于[Unreal](https://docs.unrealengine.com/en-US/Gameplay/Localization/Formatting/#argumentmodifiers), [Unity](https://docs.unity3d.com/Packages/com.unity.localization@0.2/manual/index.html#plural-support), 和Unicode的[MessageFormat](https://messageformat.github.io/messageformat/)中的类似实现。
@@ -474,13 +414,9 @@ Format functions start and end with `[` and `]`. Inside these braces, you specif
 
 一共有三种可用的格式化函数：`select`，`plural`和`ordinal`。
 
-There are three format functions available: `select`, `plural` and `ordinal`.
-
 ### `select`
 
 格式化函数`select`允许您使用变量的值在一组固定的选项之间进行选择。
-
-The `select` format function allows you to use a variable's value to select between a fixed set of options.   
 
 ```yarn
 [select {$value} option1="replacement1" option2="replacement2"]
@@ -488,51 +424,48 @@ The `select` format function allows you to use a variable's value to select betw
 
 基于您提供的变量的值，将选择相应的替换项。在上面的示例中，如果`$value`的值为`option1`，则插入文本`"replacement1"`；如果`$value`的值为`option2`，则插入文本`"replacement2"`。替换项的数量没有限制。如果`$value`的值不为任何一个，则插入一个错误值。
 
-Based on the value of the variable you provide, different replacement will be selected. In the above example, if the value of `$value` is `"option1"`, then the text `"replacement1"` will be inserted; if `$value` is `"option2"`, then `"replacement2"` will be inserted. There's no limit on the number of options. If `$value` is neither, an error value will be inserted.
-
 {{<note>}}
 格式化函数`select`不查找特定值；而是一个通用的文本替换工具。
 {{</note>}}
 
-This is most useful for when you want to use different pronouns based on a variable storing the gender of a character. 
+当您想要根据变量保存的角色性别来使用不同的拼写时是非常有用的。
 
-For example, imagine that the variable `$gender` contains the gender of a character, and may contain the values "`m`" for male, "`f`" for female, or "`nb`" for nonbinary.
+举个例子，想象一下变量`$gender`包含一个角色的性别，并且可能存在值“`m`”对应男性，值“`f`”对应女性，或者“`nb`”对应非二者
 
 ```yarn
-I haven't seen [select {$gender} m="him" f="her" nb="them"].
+我没有见到 [select {$gender} m="他" f="她" nb="他们"]。
 ```
 
-### `plural` and `ordinal`
+### `plural` 和 `ordinal`
 
-The `plural` and `ordinal` format functions maps a number value to its *plural class*, based on the current language.
+`plural`和`ordinal`格式化函数根据当前语言将数字值映射为它的*复数类*。
 
-Different languages use different rules for pluralising numbers. In English (and many other languages), there are two plural classes numbers: if an integer is 1, it is *singular*, and otherwise, it's *plural*; other rules apply to different languages.
+不同的语言使用不同的复数形式。在英语（和很多其他语言）中有两种复数类型数：如果一个整数为1，则其为*单数*，其他情况下为*复数*；其他规则适用于不同的语言。
 
-These format functions let you pass in a variable, and select the appropriate text to display based on the plural class:
+这些格式化函数允许您传递一个变量，并且根据复数类来选择适合的文本显示：
 
-* The `plural` format function selects a number's *cardinal* plural class, used for counting values: "1 apple", "2 apples", and so on.
-* The `ordinal` format function selects a number's *ordinal* plural class, used for ranking values: "1st", "2nd", and so on.
+* 格式化函数`plural`选择一个数字的*基本*复数类，其使用在计数值上：“1 apple”，“2 apples”等等。
+* 格式化函数`ordinal`选择一个数字的*基本*复数类，其使用在排序值上：“1st”，“2nd”等等。
 
-The available plural classes for use in `plural` and `ordinal` are: *zero*, *one*, *two*, *few*, *many*, and *other*.
+在`plural`和`ordinal`中可用的复数类有：*zero*，*one*，*two*，*few*，*many*和*other*。
 
 {{<note>}}
-Different plural classes exist in different languages; when localising a line that contains the `plural` or `ordinal` format functions, you will need to use the plural classes that apply to your target language.
+不同的语言存在不同的复数类；当本地化包含`plural`或`ordinal`格式函数的行时，您将需要使用适用于目标语言的复数类。
 {{</note>}}
 
-The rules used to select the plural class for the number are derived from [Unicode's CLDR](https://www.unicode.org/cldr/charts/36.1/supplemental/language_plural_rules.html). The specific rules used at run-time are determined by the text language property on the {{<xref "/docs/unity/components/dialogue-runner">}}.
-
+用于选择数字的复数类的规则源自[Unicode's CLDR](https://www.unicode.org/cldr/charts/36.1/supplemental/language_plural_rules.html)。在运行时使用的特定规则由{{<xref "/docs/unity/components/dialogue-runner">}}上的文本语言属性决定。
 
 #### `plural`
 
-The `plural` format function selects text based on the input value's cardinal plural class.
+格式化函数`plural`基于输入值的基本复数类选择文本。
 
-For example, imagine you have a variable called `$apples`, which represents how many apples the player has, and you want to show this to the player. You can use the `plural` format function for this, like so:
+举个例子，想象一下您有一个代表玩家拥有多少个苹果的变量`$apples`，并且您想要将其展示给玩家。此时您就可以像这样使用格式化函数`plural`：
 
 ```yarn
 You have {$apples} [plural {$apples} one="apple" other="apples"]
 ```
 
-When the language text of the [dialogue runner]({{<ref "dialogue-runner.md">}}) is set to English, this will render in the following ways:
+当[对话运行器]({{<ref "dialogue-runner.md">}})的文本语言设定为英语时，其将会被渲染成下面的样子：
 
 * `$apple == 1`: "You have 1 apple"
 * `$apple == 2`: "You have 2 apples"
@@ -542,28 +475,28 @@ When the language text of the [dialogue runner]({{<ref "dialogue-runner.md">}}) 
 
 The `plural` format function selects text based on the input value's ordinal plural class.
 
-For example, imagine you have a variable called `$race_position`, which contains the position that the player came in in a race. You can use the `ordinal` format function for this, like so:
+举个例子，想象一下你有一个包含这玩家在比赛中获得的位置的变量叫做`$race_position`。您可以对该变量使用格式化函数`ordinal`，像下面这样：
 
 ```yarn
 I came in {$race_position}[ordinal {$race_position} one="st" two="nd" few="rd" other="th"] place!
 ```
 
-When the language text of the [dialogue runner]({{<ref "dialogue-runner.md">}}) is set to English, this will render in the following ways:
+当[对话运行器]({{<ref "dialogue-runner.md">}})的文本语言设定为英语时，其将会被渲染成下面的样子：
 
 * `$race_position == 1`: "I came in 1st place!"
 * `$race_position == 2`: "I came in 2nd place!"
 * `$race_position == 3`: "I came in 3rd place!"
 * `$race_position == 6`: "I came in 6th place!"
 
-### Value insertion
+### 值注入
 
-In a format function's replacement value, the `%` character is replaced with the original value that was used to select the appropriate text to use. For example, going back to our "number of apples" example, you can write the line in a way that only causes numbers to appear in the plural case:
+在格式化函数的替换值中，`％`字符将用原始值替换用于选择要使用的适当文本。 例如，回到我们的“苹果数量”示例，您可以以仅使数字出现在复数形式的方式编写该行：
 
 ```yarn
 You have [plural {$apples} one="an apple" other="% apples"]
 ```
 
-In English, this will be rendered as:
+在英语中，它将被渲染成：
 
 * `$apple == 1`: "You have an apple"
 * `$apple == 2`: "You have 2 apples"
