@@ -38,8 +38,6 @@ Yarn Spinner每次处理一行，并将它们传递到游戏中。如何处理�
 
 我们将从运行Yarn Spinner附带的示例游戏开始。 它很短，只有大约2分钟。
 
-We'll begin by playing the example game that comes with Yarn Spinner. It's very short - about 2 minutes long.
-
 1. **创建一个空Unity工程。** 选择2D模版。
 2. **下载并安装Yarn Spinner。** 前往[安装]({{< ref "docs/unity/installing.md" >}})指南，并遵循指示。
 3. **打开示例场景。**
@@ -59,15 +57,21 @@ Yarn Spinner将其对话保存在`.yarn`文件中。这些文件是纯文本，�
 
 <!-- Write a Yarn Editor tutorial and link it here probably  -->
 
-## Reading Yarn
+## 读懂 Yarn
+
+在本节教程中，我们将打开文件`Sally.yarn`，看看它在做什么。
 
 In this section of the tutorial, we're going to open the file `Sally.yarn`, and look at what it's doing.
 
-1. **Open `Sally.yarn` in your editor of choice.**
+1. **在您选择的编辑器中打开`Sally.yarn`。**
+
+Yarn Spinner将其所有的对话分组为**节点**。节点包含：您的对话行，展示给玩家的选择，传递给游戏的命令等所有内容。`Sally.yarn`文件包含上述四项内容：`Sally`，`Sally.Watch`，`Sally.Exit`和`Sally.Sorry`。设置示例游戏后，当您走到Sally旁边并按空格键时，游戏将开始运行`Sally`节点。
 
 Yarn Spinner groups all of its dialogue into **nodes**. Nodes contain everything: your lines of dialogue, the choices you show to the player, and the commands that you send to the game. The `Sally.yarn` file contains four of them:  `Sally`, `Sally.Watch`, `Sally.Exit`, and `Sally.Sorry`. The example game is set up so that when you walk up to Sally and press the spacebar, the game will start running the `Sally` node. 
 
-2. **Go to the `Sally` node.**
+2. **转到`Sally`节点**
+
+让我们看下节点都包含什么内容。这是它的全文：
 
 Let's take a look at what that node contains. Here's the entire text of it:
 
@@ -92,9 +96,13 @@ Let's take a look at what that node contains. Here's the entire text of it:
 [[See you later.|Sally.Exit]] #line:0facf7
 ```
 
+花一点时间读一下代码，并理解它的结构。
+
 Take a second now to look at this code, and get a feel for its structure.
 
-### Lines and Logic
+### 行与逻辑
+
+现在，我们将仔细研究该代码的每个部分，并说明发生了什么。
 
 We'll now take a closer look at each part of this code, and explain what's going on.
 
