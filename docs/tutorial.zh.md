@@ -61,13 +61,9 @@ Yarn Spinner将其对话保存在`.yarn`文件中。这些文件是纯文本，�
 
 在本节教程中，我们将打开文件`Sally.yarn`，看看它在做什么。
 
-In this section of the tutorial, we're going to open the file `Sally.yarn`, and look at what it's doing.
-
 1. **在您选择的编辑器中打开`Sally.yarn`。**
 
 Yarn Spinner将其所有的对话分组为**节点**。节点包含：您的对话行，展示给玩家的选择，传递给游戏的命令等所有内容。`Sally.yarn`文件包含上述四项内容：`Sally`，`Sally.Watch`，`Sally.Exit`和`Sally.Sorry`。设置示例游戏后，当您走到Sally旁边并按空格键时，游戏将开始运行`Sally`节点。
-
-Yarn Spinner groups all of its dialogue into **nodes**. Nodes contain everything: your lines of dialogue, the choices you show to the player, and the commands that you send to the game. The `Sally.yarn` file contains four of them:  `Sally`, `Sally.Watch`, `Sally.Exit`, and `Sally.Sorry`. The example game is set up so that when you walk up to Sally and press the spacebar, the game will start running the `Sally` node. 
 
 2. **转到`Sally`节点**
 
@@ -98,13 +94,9 @@ Let's take a look at what that node contains. Here's the entire text of it:
 
 花一点时间读一下代码，并理解它的结构。
 
-Take a second now to look at this code, and get a feel for its structure.
-
 ### 行与逻辑
 
 现在，我们将仔细研究该代码的每个部分，并说明发生了什么。
-
-We'll now take a closer look at each part of this code, and explain what's going on.
 
 ```yarn
 <<if visited("Sally") is false>>
@@ -118,19 +110,19 @@ We'll now take a closer look at each part of this code, and explain what's going
 <<endif>>
 ```
 
-The first line of code in this node checks to see if Yarn Spinner has already run this node. `visited` is a function that this example game has defined - it isn't built into Yarn Spinner. It returns `true` if the node you specify has been run before. You'll notice that this line is wrapped in `<<` and `>>` symbols. This tells Yarn Spinner that it's control code, and not meant to be shown to the player.
+此节点中的第一行代码检查Yarn Spinner是否已运行此节点。`visited`是此示例游戏已定义的函数——它并未内置在Yarn Spinner中。如果您指定的节点之前已经运行过，它将返回`true`。您会注意到，该行用`<<`和`>>`符号包裹。这告诉Yarn Spinner它是控制代码，而不是要向玩家显示。
 
 <!-- add a tutorial on defining functions -->
 
-If they haven't run the `Sally` node yet, it means that this is the first time that we've spoken to Sally in this game. As a result, we run lines in which Sally and the player character meet. Otherwise, we instead run some shorter lines.
+如果他们还没有运行`Sally`节点，则意味着这是我们在游戏中第一次与Sally对话。作为结果，我们将运行Sally和玩家角色相遇中的行。否则，我们改为运行一些较短的行。
 
-Each line in Yarn Spinner is just a run of text, which is sent directly to the game. It's up to the game to decide how it wants to display it; in the example game, it's shown at the top of the screen.
+Yarn Spinner中的每一行只是一小段文本，这些文本将直接发送到游戏中。如何显示文本完全取决于游戏。在示例游戏中，它显示在屏幕顶部。
 
-At the end of each line, you'll see a `#line:` tag. This tag lets Yarn Spinner identify lines across multiple translations, and is optional if you aren't translating your game into other languages. Yarn Spinner can automatically generate them for you.
+在每行的行尾，您将会看到`#line`标签。使用此标记，Yarn Spinner可以识别行到多个翻译，如果您不打算将游戏翻译成其他语言，则该标记是可选的。
 
-### Options
+### 选项
 
-Here's the next part of the code.
+这是代码的下一部分。
 
 ```yarn
 <<if not visited("Sally.Watch")>>
