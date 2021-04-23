@@ -134,39 +134,39 @@ Yarn Spinner中的每一行只是一小段文本，这些文本将直接发送�
 <<endif>>
 ```
 
-In the next part of the code, we do a check, and if it passes, we add an *option*. Options are things that the player can select; in this game, they're things the player can say, but like lines, it's up to the game to decide what to do with them. Options are shown to the player when the end of a node is reached.
+在代码的下一部分，我们进行一个检查，如果通过，则添加一个*选项*。选项是玩家可以选择的东西。在本游戏中，它们是玩家可以说的话，但就像行一样，如何处理它们取决于游戏。到达节点末端时，选项会显示给玩家。
 
-The first couple of lines here test to see whether the player has run the node `Sally.Watch`. If they haven't, then the code adds a new option. Options are wrapped with `[[` and `]]`. The text before the `|` is shown to the player, and the text after is the name of the node that will be run if the player chooses the option. Like lines, options can have line tags for localisation.
+这里的前两行测试玩家是否已经运行了节点`Sally.Watch`。如果还没有，则代码会添加一个新选项。选项由`[[`和`]]`包裹。`|`之前的文本向将会展示给玩家，而后面的文本是如果玩家选择该选项将运行的节点的名称。像行一样，选项可以具有用于本地化的行标签。
 
-If the player *has* run the `Sally.Watch` node before, this code won't be run, which means that the option to run it again won't appear.
+如果玩家之前*已经*运行过`Sally.Watch`节点，则该代码将不会运行，这意味着不会再次运行该选项。
 
-The rest of this part does a similar thing as the first: it does a check, and adds another option if the check passes. In this case, it checks to see if the variable `$sally_warning` is true, and if the player has not yet run the `Sally.Sorry` node. `$sally_warning` is set in a different node - it's in the node `Ship`, which is stored in the file `Ship.yarn`.
+其余部分与第一部分完成类似的事情：它会进行检查，如果检查通过则添加另一个选项。在本示例中，它将检查变量`$sally_warning`是否为真，以及玩家是否尚未运行`Sally.Sorry`节点。`$ sally_warning`是在另一个节点`Ship`中设置的，该节点存储在文件`Ship.yarn`中。
 
 ```yarn
 [[See you later.|Sally.Exit]] #line:0facf7
 ```
 
-The very last line of the node adds an option, which takes the player to the `Sally.Exit` line. Because this option isn't inside an `if` statement, it's always added.
+节点的最后一行添加了一个选项，该选项将玩家带到`Sally.Exit`行。因为这个选项不在`if`语句中，所以它总是会被添加。
 
-When Yarn Spinner hits the end of the node, all of the options that have been accumulated so far will be shown to the player. Yarn Spinner will then wait for the player to make a selection, and then start running the node that they selected.
+当Yarn Spinner到达节点的末端时，到目前为止已累积的所有选项都将显示给玩家。接着，Yarn Spinner将等待玩家做出选择，然后开始运行他们选择的节点。
 
-And that's how the node works!
+这就是节点的工作原理！
 
-## Writing Some Dialogue
+## 撰写对话
 
-Let's write some dialogue! We'll add a couple of lines to the Ship.
+让我们写一些对话吧！我们将在Ship上添加几行。
 
-1. **Open the file `Ship.yarn`.** It contains a single node, called `Ship` - go to it.
+1. **打开文件`Ship.yarn`。** 它包含一个名为`Ship`的节点，请转到该节点。
 
-This code uses couple of features that we didn't see in `Sally`: *commands*, and *variables*. 
+这段代码使用了一些我们在`Sally`中没有看到的功能：*命令*和*变量*。
 
-### Commands
+### 命令
 
-Commands are messages that Yarn Spinner sends to your game, but aren't intended to be shown to the player. Commands let you control things in your scene, like moving the camera around, or instructing a character to move to another point. 
+命令是Yarn Spinner发送到您的游戏但并不希望显示给玩家的消息。命令使您可以控制场景中的事件，例如移动摄像机或指示角色移动到另一点。
 
-Because every game is different, Yarn Spinner leaves the task of defining most commands to you. Yarn Spinner defines two built-in commands: `wait`, which pauses the dialogue for a certain number of seconds, and `stop`, which ends the dialogue immediately.
+由于每个游戏都不相同，因此Yarn Spinner把定义大部分命令的权力留给您。Yarn Spinner定义了两个内置命令：`wait`（使对话暂停一定秒数）和`stop`（使对话立即结束）。
 
-The example game defines its own command, `setsprite`, which is used to change the sprite that the Ship character's face is displaying. You can see this in action in the file `Ship.yarn`:
+该示例游戏定义了自定义的命令`setsprite`，该命令用于更改Ship角色正在显示的脸部精灵。您可以在文件`Ship.yarn`中看到这一点：
 
 ```yarn
 Player: How's space?
@@ -177,18 +177,18 @@ Ship: It's HUGE!
 ```
 
 {{<note>}}
-You can learn how to define your own custom commands in {{<xref "/docs/unity/working-with-commands">}}.
+你可以在{{<xref "/docs/unity/working-with-commands">}}中进一步了解如何定义自定义命令。
 {{</note>}}
 
-### Variables
+### 变量
 
-Variables are how you store information about what the player has done in the game. We saw variables in use in the `Sally` node, where the variable `$sally_warning` was used to control whether some content was shown or not. This variable is set in here, in the `Ship` node - it represents whether or not the player has heard Sally's warning about the console from the Ship.
+变量是您存储有关玩家在游戏中所完成操作的信息的方式。我们在`Sally`节点中看到了变量的用法，使用变量`sally_warning`来控制是否显示某些内容。此变量在此处的`Ship`节点中定义，表示玩家是否已从Ship处听到Sally关于主机的警告。
 
-Variables in Yarn Spinner start with a `$`, and can store text, numbers, booleans (true or false values), or `null`. If you try and access a variable that hasn't been set, you'll get the value `null`, which represents "no value".
+Yarn Spinner中的变量以`$`开头，其可以存储文本，数字，布尔值（真或假值）或`null`。如果尝试访问未定义的变量，则会得到值`null`，表示“无值”。
 
-### Adding Some Content
+### 添加内容
 
-2. **Add some new dialogue.** Add the following text to the end of the node:
+2. **添加一些新对话。** 将以下文本添加到节点的末尾：
 
 ```yarn
 
@@ -202,21 +202,21 @@ Ship: Anything else I can help with?
 Ship: Bye!
 ```
 
-### Shortcut Options
+### 快捷选项
 
-The `->` items that we just added are called **shortcut options**. Shortcut options let you put choices in your node without having to create new nodes, which you link to through the `[[Option]]` syntax. They exist in-line with the rest of your node.
+我们刚刚添加的`->`被称为**快捷选项**。快捷选项使您可以在节点中放置选项，而不必创建通过`[[Option]]`语法链接的新节点。它们与节点的其余部分共存.
 
-To use a shortcut option, you write a `->`, followed by the text that you want to display. Then, on the next lines, indent the code a few spaces (it doesn't matter how many, as long as you're consistent.) The indented lines will run if the option they're attached to is selected. Shortcut options can be nested, which means you can put a group of shortcut options inside another. You can put any kind of code inside a shortcut option's lines.
+要使用快捷方式选项，创建一个`->`，然后是要显示的文本。然后，在接下来的几行中，将代码缩进几个空格（保持一致即可）。如果选择了缩进的行所对应的选项，则缩进的行将运行。快捷选项可以嵌套，这意味着您可以将一组快捷选项放在另一个快捷选项中。您可以在快捷选项的行中放入任何类型的代码。
 
-Because shortcut options don't require you to create new nodes, they're really good for situations where you want to offer the player some kind of choice that doesn't significantly change the flow of the story.
+因为快捷选项不需要您创建新节点，所以它们很适用于您希望为玩家提供某种不会显着改变故事流程的选择的情况。
 
-3. **Save the file, and go back to the game.** Play the game again, and talk to the Ship. At the end of the conversation, you'll see new dialogue.
+3. **保存文件，并返回游戏。** 再次运行游戏，然后与Ship交谈。在交谈的最后，您将看到新的对话。
 
-## Where Next
+## 接下来做什么
 
-The example game is set up so that when you talk to Sally, the node `Sally` is run, and when you talk to the Ship, the node `Ship` is run. With this in mind, change the story so that after you get told off by Sally, she asks you to go and fix a problem with the Ship.
+示例游戏已经完成设置，当您与Sally对话时，将运行节点`Sally`，而当您与Ship对话时，将运行节点`Ship`。了解这些后，请更改故事，以便在您被Sally告知后，她要求您去解决Ship的问题。
 
-You can also read the [Syntax Reference]({{< ref "syntax.md" >}}) for Yarn Spinner.
+您也可以阅读Yarn Spinner的[语法参考]({{< ref "syntax.md" >}})。
 
 
 <!-- 
