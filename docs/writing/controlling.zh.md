@@ -72,9 +72,7 @@ Mae: That’s spooky, Mr. Chazokov.
 
 快捷方式选项可以有自己的行，其在选择该选项时被运行。要编写此代码，请*缩进*属于快捷选项的行。 
 
-Shortcut options can have their own lines, which are run when the option is selected. To write this, *indent* the lines that belong to a shortcut option.
-
-In the following code, different lines will run based on which of the two shortcut options are selected.
+在下面的代码中，根据选择的两个快捷选项中的哪一个，将运行不同的行。
 
 ```yarn
 Mae: What are you doing anyway? 
@@ -94,11 +92,11 @@ Chazokov: Hunting dusk stars!
     Mae: I forget. 
 ```
 
-### Nested shortcut options
+### 嵌套快捷选项
 
-In addition to containing lines, shortcut options can also contain *other* shortcut options. 
+除了包含行，快捷选项还可以包含*另一个*快捷选项。 
 
-For example, this code from *Night in the Woods* shows how shortcut options can be nested:
+例如，来自*Night in the Woods*的以下代码显示了如何嵌套快捷选项： 
 
 ```yarn
 Mae: Whatcha readin'?
@@ -118,14 +116,14 @@ Mom: octopus, squid, lobster, gulls, albatross,
 ```                
 
 {{<note>}}
-It's easy to create very complicated nested structures with nested shortcut options, and this can make your dialogue difficult to read in the editor. If your dialogue starts looking too complex, consider rewriting it to use regular [options](#options) instead.
+使用嵌套的快捷选项创建非常复杂的嵌套结构很容易，但这会使您的对话难以在编辑器中阅读。如果您的对话开始变得过于复杂，请考虑使用常规[选项](#options)来重写。
 {{</note>}}
 
-### Conditionals
+### 条件判断
 
-You can add a *conditional* to the end of a shortcut option, which controls whether the option will appear or not. To do this, you write an [`if` statement](#if-statements) at the end of the line.
+您可以在快捷选项的末尾添加*条件判断*，以控制该选项是否出现。为此，请在该行的末尾编写[`if`语句](#if-statements)。
 
-For example, consider the following code:
+例如，考虑以下代码：
 
 ```yarn
 Gregg: so what's up?
@@ -138,23 +136,23 @@ Gregg: so what's up?
     [[InvestigationQuest]]
 ```
 
-In this example:
+在本例中：
 
-* The option "Just saying hello" will always appear, because it has no conditional. 
-* The option "You up for smashing some lightbulbs?" will appear only if the variable `$light_bulb_smash_done` is set to `0`.
-* The option "Diiiid you wanna check out the historical society?" will appear only if the variable `$did_gregg_investigation_quest` is set to `0`.
+* 选项“Just saying hello”因为没有条件判断所以总会显示。
+* 选项“You up for smashing some lightbulbs?”只有当变量`$light_bulb_smash_done`值设置为0时才会显示。
+* 选项“Diiiid you wanna check out the historical society?”只有当变量`did_gregg_investigation_quest`值设置为0时才会显示。
 
-Note that unlike a regular `if` statement, there's no `else` or `endif` used at the end of the line.
+请注意，与常规的`if`语句不同，这里的条件判断没有在行尾使用`else`或`endif`。
 
 {{<note>}}
-To learn more about the expressions you can use in a conditional, see {{<xref "/docs/writing/expressions-and-variables">}}.
+在{{<xref "/docs/writing/expressions-and-variables">}}中进一步了解可以在条件判断中使用的表达式。
 {{</note>}}
 
-## Jumps
+## 跳转
 
-A **jump** is an instruction to immediately start running another node. 
+**跳转**是一个立即开始运行另一个节点的指令。 
 
-For example, consider the following code:
+例如，考虑以下代码：
 
 ```yarn
 Bea: You know what? Yeah. Let's go.
@@ -164,17 +162,17 @@ Mae: I promise it'll be great.
 [[BeaWeSureWereDoingThis]]
 ```
 
-When Yarn Spinner reaches the final line, it will immediately start running the node `BeaWeSureWereDoingThis`.
+当Yarn Spinner到达最终行时，它会立即开始运行节点`BeaWeSureWereDoingThis`。
 
 {{<note>}}
-Because a jump moves right to another node, any content after it will not be run.
+因为跳转直接转移到另一个节点，所以在之后的任何内容都不会运行。
 {{</note>}}
 
-## `if` statements
+## `if`语句
 
-An `if` statement lets you control which parts of your dialogue are run, based on the result of an expression.
+`if`语句使您可以根据一个表达式的结果来控制运行对话的哪些部分。 
 
-For example, consider the following code:
+例如，考虑以下代码：
 
 ```yarn
 Gregg: i mean you know what Angus would say
@@ -188,16 +186,16 @@ Gregg: i mean you know what Angus would say
 <<endif>>
 ```
 
-If the variable `$did_angus_investigation_quest` is set to `true`, the lines "ha ha yeah, pattern seeking" will appear. Otherwise, the other lines would appear.
+如果变量`$did_angus_investigation_quest`的值置为`true`,则显示行“ha ha yeah, pattern seeking”。否则其他行将会显示。
 
 {{<note>}}
-To learn more about the expressions you can use inside `if` statements, see {{<xref "docs/writing/expressions-and-variables" >}}.
+在{{<xref "docs/writing/expressions-and-variables" >}}中进一步了解可以在`if`语句中使用的表达式。
 {{</note>}}
 
 
-### `if` statements and Options
+### `if`语句和选项
 
-If an option is inside an `if` statement, and that `if` statement is not run, Yarn Spinner won't display that option to the player. For example, consider the following code:
+如果一个选项在一个`if`语句的内部，并且`if`语句没有运行，则Yarn Spinner将不会把该选项显示给玩家。例如，考虑以下代码：
 
 ```yarn
 Mae: Ok kids we're gonna go with...
@@ -213,12 +211,12 @@ Mae: Ok kids we're gonna go with...
 <<endif>>
 ```
 
-When the end of the node is run, the options that are displayed will depend upon the value of variables used in the `if` statements:
+当节点的末尾运行时，显示的选项将取决于`if`语句中使用的变量的值：
 
-* The first option "Actually, I'm not sure yet" will always appear.
-* The option "Frog Head" will only appear if the variable `$robot_head_0_done` is set to the value `1`.
-* The option "Pig Head" will only appear if the variable `$robot_head_1_done` is set to the value `1`.
-* The option "Rabbit Head" will only appear if the variable `$robot_head_2_done` is set to the value `1`.
+* 第一个选项“Actually, I'm not sure yet”总是会显示。
+* 选项“Frog Head”仅在变量`$robot_head_0_done`的值置为`1`时显示。
+* 选项“Pig Head”仅在变量`$robot_head_1_done`的值置为`1`时显示。
+* 选项“Rabbit Head”仅在变量`$robot_head_2_done`的值置为`1`时显示。
 
 
 
