@@ -1,8 +1,8 @@
 ---
-title: "编辑器"
+title: "Editors"
 date: 
 tags: []
-summary: "为了编写对话，您需要使用一种编辑工具。了解可用于编写Yarn代码的应用程序。 "
+summary: "In order to write your dialogue, you'll need a tool to write with. Learn what apps are available to write Yarn content."
 draft: false
 toc: true
 weight: 1
@@ -12,15 +12,14 @@ menu:
         parent: "writing"        
 ---
 
-有两种选择来编写您的Yarn脚本。 
-## Yarn 编辑器
+There are two options for writing Yarn your scripts.
 
-[Yarn 编辑器]({{< ref "yarn-editor.md" >}})是为以可视方式编写Yarn代码而定制的工具。 
+## The Yarn Editor
 
-## 文本编辑器
+The [Yarn Editor]({{< ref "yarn-editor.md" >}}) is a tool that's custom-built for writing Yarn content in a visual way.
 
-您也可以使用任何[文本编辑器]({{< ref "text-editor.md" >}})来编写您的代码。
+## Text Editors
 
-{{<note>}}
-如果您选择使用[Visual Studio Code](https://code.visualstudio.com)，我们提供了一个[扩展](https://marketplace.visualstudio.com/items?itemName=SecretLab.yarn-spinner)来添加对Yarn Spinner的支持。
-{{</note>}}
+You can also use any [text editor]({{< ref "text-editor.md" >}}) to write your code. 
+
+{{<note>}}If you use [Visual Studio Code](https://code.visualstudio.com), we provide an [extension](https://marketplace.visualstudio.com/items?itemName=SecretLab.yarn-spinner) that adds support for Yarn Spinner.{{</note>}}
