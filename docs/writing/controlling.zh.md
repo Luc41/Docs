@@ -19,13 +19,21 @@ Yarn Spinner is designed to make it easier to write conversations where the play
 
 In this section, we'll look at the ways you can control what your dialogue does, based on player choices, and on the rest of the game.
 
-## Options
+## 选项
+
+*选项*是到达节点末端时显示在玩家的行。选项与节点关联； 当您编写选项时，您还将编写在选择该选项时应该运行哪个节点。
 
 An *option* is a line that's shown to the player when the end of a node is reached. Options are associated with nodes; when you write an option, you also write which node should be run when that option is selected.
 
+当Yarn Spinner遇到一个选项时，它不会立即显示出来。而是将其添加到的一个选项列表中，并保留该列表。
+
 When Yarn Spinner encounters an option, it doesn't show it right away. Instead, it adds it to a list of options that it's seen, and keeps that list around. 
 
+当Yarn Spinner到达节点的末尾时，它会将看到的所有选项发送给游戏，并等待游戏发回玩家的选择。然后，它运行与该选项关联的节点。
+
 When Yarn Spinner reaches the end of the node, it sends all of the options it's seen to the game, and waits for the game to send back the player's selection. It then runs the node that that option was associated with. 
+
+例如，请考虑以下来自*Night in the woods*中的代码：
 
 For example, consider the following code from *Night in the Woods*:
 
@@ -39,19 +47,31 @@ Penderson: You get a job yet?
 [[Yes. I’ve been elected mayor.|ElectedMayor]]
 ```
 
+如果玩家选择了选项“是的，我已经当选市长”，Yarn Spinner将运行节点`ElectedMayor`。 
+
 If the player selected the option "Yes. I've been elected mayor", Yarn Spinner would run the node `ElectedMayor`.
+
+选项通常位于节点的末端，但不一定必须如此。例如，上面示例中的选项可以放置在代码中的任何位置。这是因为仅在到达节点末尾时才显示选项。 
 
 Options are usually at the end of the node, but they don't have to be. For example, the options in the example above could have been placed anywhere in the code. This is because options are only displayed when the end of a node is reached.
 
 {{<note>}}
+如果到达节点的末尾，并且看不到任何选项，则Yarn Spinner将结束对话。
+
 If the end of a node is reached, and no options have been seen, Yarn Spinner will end the dialogue.
 {{</note>}}
 
-## Shortcut options
+## 快捷选项
+
+快捷选项允许您无需创建其他节点而向玩家显示选项。当您要在节点中间显示一些选项，然后继续运行节点的其余部分时，它们很有用。
 
 Shortcut options let you present options to the player without having to create additional nodes. They're useful for when you want to show some options in the middle of a node, and then resume running the rest of the node.
 
+快捷选项以`->`（破折号，后跟一个大于号）开头，后跟该选项的文本。 
+
 Shortcut options start with a `->` (a dash, followed by a greater-than sign), followed by the text of the option.
+
+例如，考虑以下代码：
 
 For example, consider the following code:
 
@@ -66,13 +86,17 @@ Chazokov: No one can resist the stars forever.
 Mae: That’s spooky, Mr. Chazokov.
 ```
 
+运行此代码后，选项将出现在“Will you be back”行之后。 然后，Yarn Spinner发送选项“Yeah if I remember!”和“Probably not.”到游戏，然后等待响应。在做出选择后，其余的行开始运行。 
+
 When this code is run, options will appear after the line "Will you be back?". Yarn Spinner then sends the options "Yeah if I remember!" and "Probably not" to the game, and waits for a response. After a choice is made, the remaining lines start being run.
 
 {{<note>}}
+快捷选项和常规选项之间的唯一区别是它们的编写方式。从游戏和玩家的角度来看，它们的表现没有什么区别。 
+
 The only difference between shortcut options and regular options is the way they're written. From the perspective of the game, and of the player, there's no difference in how they appear.
 {{</note>}}
  
-### Shortcut options and lines
+### 快捷选项和行
 
 Shortcut options can have their own lines, which are run when the option is selected. To write this, *indent* the lines that belong to a shortcut option.
 
