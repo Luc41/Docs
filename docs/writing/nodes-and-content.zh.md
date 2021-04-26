@@ -1,8 +1,8 @@
 ---
-title: "Nodes and Content"
+title: "节点和内容"
 date: 
 tags: []
-summary: "Learn what's in a Yarn file, and how Yarn Spinner arranges its content."
+summary: "了解Yarn文件中的内容，以及Yarn Spinner如何安排其内容。"
 draft: false
 toc: true
 weight: 1
@@ -12,23 +12,37 @@ menu:
         weight: 1
 ---
 
+在Yarn Spinner中，所有的对话都保存在`.yarn`文件中。您可以使用[Yarn编辑器]({{< ref "yarn-editor" >}})，或者[纯文本编辑器]({{< ref "text-editor" >}})来创建这些文件。
+
 In Yarn Spinner, all of your dialogue is stored in `.yarn` files. You can create these files using the [Yarn Editor]({{< ref "yarn-editor" >}}), or with a [plain text editor]({{< ref "text-editor" >}}).
 
-## Nodes
+## 节点
+
+Yarn Spinner文件包含**节点**。每个节点至少具有一个标题和一个正文。标题是节点的名称，正文则是包含游戏的对话的Yarn脚本。
 
 Yarn Spinner files contain **nodes**. Each node has, at the very minimum, a title and a body. The title is the name of the node, and the body contains the Yarn script that contains your game's dialogue. 
 
+节点的标题很重要，因为游戏使用它来向Yarn Spinner指示要开始运行的节点，并在节点之间建立连接，例如[选项]({{< relref "#options" >}})。
+
 The title of a node is important, because it's used by your game to indicate to Yarn Spinner which node to start running, and to make connections between nodes, such as with [options]({{< relref "#options" >}}).
+
+节点标题不会展示给玩家，并且不能包含空格。
 
 Node titles are not shown to the player, and they cannot contain spaces.
 
-## Node Content
+## 节点内容
+
+节点的正文由三个不同的内容构成：*行*，*命令*，和*选项*。
 
 The body of a node is made up of three different kinds of content: *lines*, *commands*, and *options*.
 
-### Lines
+### 行
+
+当您编写Yarn Spinner对话时，在节点中编写的几乎每一行文本都是**行**。当运行节点时，它每次运行一行，然后将其发送到您的游戏。
 
 When you write Yarn Spinner dialogue, just about every line of text that you write in a node is a **line**. When a node is run, it runs each line, one at a time, and sends it to your game.
+
+例如，考虑以下来自*Night in the Woods*中的代码：
 
 For example, consider the following Yarn code from *Night in the Woods*:
 
@@ -40,13 +54,17 @@ Mae: ...
 Mae: Welcome home, Mae.
 ```
 
+当此代码在游戏中运行时，它看起来像这样：
+
 When this code is run in the game, it looks like this:
 
 {{< video poster="lines-poster.png" mp4="lines.mp4" webm="lines.webm" loop="true" autoplay="true" controls="true" >}}
 
+Yarn Spinner一次将这些行中的一行发送到游戏中。游戏负责获取文本并将其呈现给玩家； 在*Night in the Woods*的情况中，这意味着绘制气泡，为每个字母添加动画效果，并等待用户按下按键以前进到下一行。
+
 Yarn Spinner sends each of these lines, one at a time, to the game. The game is responsible for taking the text, and presenting it to the player; in the case of *Night in the Woods*, this means drawing the speech bubble, animating each letter in, and waiting for the user to press a key to advance to the next line.
 
-### Commands
+### 命令
 
 A **command** is an instruction that tells your game to do something. Commands are like stage directions in a screenplay: they aren't shown directly to the player, like a line would be, but instead can be used to tell the game to perform some other kind of action. 
 
