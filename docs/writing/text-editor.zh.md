@@ -1,8 +1,8 @@
 ---
-title: "Using a text editor"
+title: "使用文本编辑器"
 date: 
 tags: []
-summary: "Learn how to use a text editor, like Visual Studio Code or Sublime Text, to write Yarn Spinner content."
+summary: "了解如何使用诸如Visual Studio Code或Sublime Text等文本编辑器来编写Yarn Spinner内容。"
 draft: false
 toc: true
 dont_show_in_lists: true
@@ -12,15 +12,15 @@ menu:
         parent: "editor"
 ---
 
-Yarn files are plain text files, which means you can use any text editor you like to work with them. This can be useful if you're want to use the same editor or integrated development environment that you use to work on other parts of your game.
+Yarn文件是纯文本文件，这意味着您可以使用任何您喜欢的文本编辑器来编写它们。如果您要使用与游戏其他部分相同的编辑器或集成开发环境，这可能会很有用。
 
 {{< note >}}
-If you use [Visual Studio Code](https://code.visualstudio.com), we provide an [extension](https://marketplace.visualstudio.com/items?itemName=SecretLab.yarn-spinner) that adds support for Yarn Spinner.
+如果您使用[Visual Studio Code](https://code.visualstudio.com)，我们提供一个[扩展](https://marketplace.visualstudio.com/items?itemName=SecretLab.yarn-spinner)来添加对Yarn Spinner的支持。
 {{< /note >}}
 
-## Creating a new `.yarn` file
+## 创建一个新的 `.yarn` 文件
 
-To create a new `.yarn` file in your text editor, create a new empty file, and add the following text to it:
+要在文本编辑器中创建一个新的`.yarn`文件，请创建一个新的空文件，并向其中添加以下文本：
 
 ```yarn
 title: Start
@@ -29,29 +29,29 @@ Hello, world!
 ===
 ```
 
-This example file contains a single node, called `Start`, which itself contains a single line ("Hello, world!").
+该示例文件包含一个名为`Start`的节点，该节点本身仅包含一行（"Hello，world!"）。
 
-Save this file as (for example) `Demo.yarn`. The file is now ready to be used in your game.
+将该文件另存为（例如）`Demo.yarn`。该文件现在可以在您的游戏中使用了。
 
-## Yarn Spinner file structure
+## Yarn Spinner 文件结构
 
-In `.yarn` files, nodes are divided into two sections: the *headers*, and the *body*. Headers contain information about a node, while the body contains the actual text of the node.
+在`.yarn`文件中，节点分为两部分：*标头*和*正文*。标头包含有关节点的信息，而主体包含该节点的实际文本。
 
-At least one header is required: the `title` header, which defines the name of the node.
+至少需要一个标头：`title`标头，它定义节点的名称。
 
-If your node has tags, they're also stored in the headers. For example, the following node has two tags, `tag1` and `tag2`:
+如果您的节点具有标签，它们也将存储在标头中。例如，以下节点具有两个标签，即`tag1`和`tag2`：
 
 ```yarn
 title: Start
 tags: tag1 tag2
 ```
 
-Headers are divided from the body with a `---` (three dashes). 
+标头与正文以`---`（三个破折号）分隔。 
 
-The body then runs for as many lines as you like, up to a line that contains `===` (three equals signs); this indicates the end of the node. After this, another node can appear, starting with the headers.
+正文可以包含任意多的行，直到包含`===`（三个等于号）的行；这表示节点的末尾。在这之后可以有另一个节点，同样始于标头。
 
-## Working with other editors
+## 使用其他编辑器进行工作
 
-`.yarn` files can be opened and modified from any editor. If you create a file in a text editor, you can open it in the [Yarn Editor]({{< ref "yarn-editor" >}}), and vice versa. 
+`.yarn`文件可以被任意编辑器打开和修改。如果您在一个文本编辑器中创建了文件，您也可以使用[Yarn Editor]({{< ref "yarn-editor" >}})来打开它，反之同理。
 
-Certain editors might add additional headers to nodes; for example, the Yarn Editor includes additional headers that define the position of the node.
+某些编辑器可能会向节点添加其他标题。例如，使用Yarn Editor会包含用于定义节点位置的其他标头。
